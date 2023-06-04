@@ -1,95 +1,72 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
+import Avatar from "boring-avatars";
+import {
+  Box,
+  Flex,
+  Heading,
+  Spacer,
+  Tag,
+  TagLabel,
+  HStack,
+  SimpleGrid,
+  Text,
+  Container,
+  Icon,
+  Center,
+} from "@chakra-ui/react";
+import { CheckCircleIcon } from "@chakra-ui/icons";
 
 export default function Home() {
+  const doneDays = [11, 18, 25, 27];
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+    <Container mt={10} max-width={"500px"}>
+      <Flex mb={10}>
+        <Box ml={4}>
+          <Avatar
+            size={120}
+            name="Maria Mitchell"
+            variant="beam"
+            colors={["#482344", "#2B5166", "#429867", "#FAB243", "#E02130"]}
+          />
+        </Box>
+        <Spacer />
+        <Box>
+          <Heading size={"md"} minW={"300px"}>
+            koki ito
+          </Heading>
+          <HStack mt={3} spacing={4}>
+            {[
+              { text: "滑り手" },
+              { text: "175cm" },
+              { text: "ホーム：秋パン" },
+            ].map((data) => (
+              <Tag
+                size={"sm"}
+                key={"sm"}
+                borderRadius="full"
+                variant="solid"
+                colorScheme="blue"
+              >
+                <TagLabel>{data.text}</TagLabel>
+              </Tag>
+            ))}
+          </HStack>
+        </Box>
+      </Flex>
+      <SimpleGrid columns={7}>
+        {[...Array(30)]
+          .map((_, i) => i + 1)
+          .map((day) => (
+            <Box height="80px" width="80px" border="1px" borderColor="white">
+              <Text m={"0 0 0 6px"}>{day}</Text>
+              {doneDays.includes(day) && (
+                <Center>
+                  <Icon as={CheckCircleIcon} w={8} h={8} color="blue" />
+                </Center>
+              )}
+            </Box>
+          ))}
+      </SimpleGrid>
+    </Container>
+  );
 }
